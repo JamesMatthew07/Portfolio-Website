@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <title>jm.dev</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+       * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Poppins;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: #000000;
+    color: #ffffff;
+    line-height: 1.6;
+    font-family: Poppins;
+    overflow-x: hidden;
+}
+
+.wrapper {
+    position: relative;
+    min-height: 100vh;
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+}
+
+.decorative-elements {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* Lines */
+.lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    margin: auto;
+    width: 90vw;
+}
+
+.line {
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    top: 0;
+    overflow: hidden;
+}
+
+.line::after {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 10vh;
+    width: 100%;
+    top: -50%;
+    left: 0;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 75%, #ffffff 100%);
+    animation: drop 7s 0s infinite;
+    animation-fill-mode: forwards;
+    animation-timing-function: cubic-bezier(0.4, 0.26, 0, 0.97);
+}
+
+@keyframes drop {
+    0% { top: -50%; }
+    100% { top: 110%; }
+}
+
+.line:nth-child(1) { left: 10%; }
+.line:nth-child(2) { left: 20%; }
+.line:nth-child(3) { left: 30%; }
+.line:nth-child(4) { left: 40%; }
+.line:nth-child(5) { left: 50%; }
+.line:nth-child(6) { left: 60%; }
+.line:nth-child(7) { left: 70%; }
+.line:nth-child(8) { left: 80%; }
+.line:nth-child(9) { left: 90%; }
+
+.line:nth-child(1)::after { animation-delay: 1s; }
+.line:nth-child(2)::after { animation-delay: 9s; }
+.line:nth-child(3)::after { animation-delay: 5s; }
+.line:nth-child(4)::after { animation-delay: 7s; }
+.line:nth-child(5)::after { animation-delay: 2s; }
+.line:nth-child(6)::after { animation-delay: 4s; }
+.line:nth-child(7)::after { animation-delay: 8s; }
+.line:nth-child(8)::after { animation-delay: 6s; }
+.line:nth-child(9)::after { animation-delay: 0s; }
+
+/* Decorative Lines */
+.headerLine, .lineSide, .lineSideRight, .lineBottom {
+    position: absolute;
+    background-color: rgb(46, 60, 81);
+}
+
+.headerLine {
+    width: 80%;
+    left: 22vh;
+    top: 0;
+    height: 2px;
+}
+
+.lineSide {
+    position: absolute;
+    height: 50vh;
+    width: 2px;
+    top: 22vh;
+    left: 22vh;
+    background-color: rgb(46, 60, 81);
+}
+
+.lineSideRight {
+    position: absolute;
+    height: 30vh;
+    width: 2px;
+    top: 58vh;
+    right: 22vh;
+    background-color: rgb(46, 60, 81);
+}
+
+.lineBottom {
+    position: absolute;
+    width: 50%;
+    left: 50%;
+    bottom: 17vh;
+    height: 2px;
+    background-color: rgb(46, 60, 81);
+}
+
+/* Navigation */
+nav {
+    position: fixed;
+    top: 0;
+    left: 22vh;
+    right: 0;
+    padding: 1rem 2rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    border-bottom: 1px solid rgb(46, 60, 81);
+    width: calc(90% - 22vh);
+}
+
+nav ul {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin-left: 3rem;
+}
+
+.nav-btn {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 0.8rem;
+    text-transform: lowercase;
+    transition: color 0.3s ease;
+}
+
+/* Sections */
+section {
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+}
+
+/* First Page */
+.firstPage {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.introTxt {
+    margin: 20vh;
+    width: 150vh;
+}
+
+.text-container {
+    position: relative;
+    height: 13vh;
+    overflow: hidden;
+}
+
+.txtName, .txtName2 {
+    font-size: 8vh;
+    color: #ffffff;
+    position: absolute;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: textCycle 5s infinite;
+}
+
+.txtName2 {
+    animation-delay: 2.5s;
+}
+
+@keyframes textCycle {
+    0%, 2% { opacity: 0; transform: translateY(-20px); }
+    5%, 45% { opacity: 1; transform: translateY(0); }
+    48%, 50% { opacity: 0; transform: translateY(20px); }
+    51%, 100% { opacity: 0; transform: translateY(-20px); }
+}
+
+.txt1 {
+    font-family: Poppins;
+    text-transform: lowercase;
+    letter-spacing: -0.02em;
+    text-align: left;
+    font-size: 10vh;
+    background: linear-gradient(to right, rgb(84, 84, 84), rgb(255, 255, 255));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+/* About Section */
+.about {
+    padding-top: 23vh;
+    padding-bottom: 10vh;
+}
+
+.aboutTxt, .aboutTopLine, .aboutLeftLine, .aboutLineBottom {
+    position: absolute;
+}
+
+.aboutTxt {
+    color: #bdbdbd;
+    font-size: 2.2vh;
+    top: 24vh;
+    left: 44vh;
+}
+
+.aboutTopLine {
+    border-bottom: 2px solid rgb(46, 60, 81);
+    width: 28.4%;
+    left: 21.6%;
+    top: 26.1vh;
+}
+
+.aboutLeftLine {
+    height: 30vh;
+    width: 2px;
+    top: 72vh;
+    left: 22vh;
+    background-color: rgb(46, 60, 81);
+}
+
+.aboutLineBottom {
+    border-bottom: 2px solid rgb(46, 60, 81);
+    width: 50%;
+    left: 9.99%;
+    top: 102vh;
+}
+
+.pg {
+    position: absolute;
+    top: 38vh;
+    left: 20%;
+    width: 80vh;
+}
+
+.pgTxt {
+    color: #ffffff;
+    font-size: 5vh;
+    font-family: Poppins;
+    background: linear-gradient(to right, rgb(102, 101, 101), #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+.about-me-button {
+    position: absolute;
+    display: inline-block;
+    padding: 10px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-family: Poppins;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    left: 44.2vh;
+    top: 80vh;
+}
+
+.about-me-button:hover {
+    background-color: rgb(255, 255, 255);
+    color: #000000;
+    text-decoration: none;
+}
+
+.about-me-button::after {
+    content: " →";
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.about-me-button:hover::after {
+    opacity: 1;
+}
+
+.contact-me-button {
+    position: absolute;
+    display: inline-block;
+    padding: 10px 101px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 17px;
+    transition: all 0.3s ease;
+    left:113.2vh;
+    top: 110vh;
+}
+
+.contact-me-button:hover {
+    background-color: rgb(255, 255, 255);
+    color: #000000;
+    text-decoration: none;
+}
+
+.contact-me-button::after {
+    content: " →";
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.contact-me-button:hover::after {
+    opacity: 1;
+}
+
+.learn-me-button {
+    position: absolute;
+    display: inline-block;
+    padding: 10px 101px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 17px;
+    transition: all 0.3s ease;
+    left:132.5vh;
+    top: 70vh;
+}
+
+.learn-me-button:hover {
+    background-color: rgb(255, 255, 255);
+    color: #000000;
+    text-decoration: none;
+}
+
+.learn-me-button::after {
+    content: " →";
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.learn-me-button:hover::after {
+    opacity: 1;
+}
+
+.learn-me-button2 {
+    position: absolute;
+    display: inline-block;
+    padding: 10px 101px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 17px;
+    transition: all 0.3s ease;
+    left:132.5vh;
+    top: 43vh;
+}
+
+.learn-me-button2:hover {
+    background-color: rgb(255, 255, 255);
+    color: #000000;
+    text-decoration: none;
+}
+
+.learn-me-button2::after {
+    content: " →";
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.learn-me-button:hover2::after {
+    opacity: 1;
+}
+
+.learn-me-button3 {
+    position: absolute;
+    display: inline-block;
+    padding: 10px 101px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 17px;
+    transition: all 0.3s ease;
+    left:132.5vh;
+    top: 100vh;
+}
+
+.learn-me-button3:hover {
+    background-color: rgb(255, 255, 255);
+    color: #000000;
+    text-decoration: none;
+}
+
+.learn-me-button3::after {
+    content: " →";
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.learn-me-button3:hover::after {
+    opacity: 1;
+}
+.philo {
+    position: absolute;
+    top: 89vh;
+    left: 20%;
+}
+
+.kaizen {
+    font-size: 3vh;
+    color: #ffffff;
+}
+
+.img {
+    position: absolute;
+    right: 22vh;
+    top: 23vh;
+}
+
+.pic {
+    height: 66.5vh;
+    width: auto;
+}
+
+.inner {
+    background-color: transparent;
+    width: 15px;
+    height: 15px;
+    border-radius: 50px;
+    box-shadow: 0 0 8px #15ff00, inset 0 0 8px #00ff40;
+    -webkit-animation: pulse 2s linear 1s infinite;
+    position: absolute;
+    right: 63.7vh;
+    top: 94.2vh;
+}
+
+@-webkit-keyframes pulse {
+    0% { box-shadow: 0 0 8px #00ff22, inset 0 0 8px #00ff22; }
+    50% { box-shadow: 0 0 16px #00ff22, inset 0 0 14px #00ff22; }
+    100% { box-shadow: 0 0 8px #00ff22, inset 0 0 8px #00ff22; }
+}
+
+.status {
+    position: absolute;
+    right: 42vh;
+    top: 92.8vh;
+}
+
+.open {
+    color: #ffffff;
+    font-size: 3vh;
+}
+
+/* Projects Section */
+.projects {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+main {
+    margin-top: 60vh;
+    display: grid;
+    width: 100%;
+    max-width: 1200px;
+    height: 100%;
+    gap: 0.5rem;
+    padding-bottom: 5vh;
+}
+
+article {
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 1rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s cubic-bezier(1,0,0,1);
+    transform: scale(0.5);
+    overflow: hidden;
+}
+
+article.reveal {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+}
+
+@media screen and (min-width: 640px) {
+    main {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    main {
+        grid-template-rows: 4fr 3fr 3fr;
+    }
+    article:nth-of-type(1) {
+        grid-row: 1/3;
+    }
+    article:nth-of-type(2) {
+        grid-row: 3/4;
+    }
+    article:nth-of-type(5) {
+        grid-column: 2/4;
+        grid-row: 2/4;
+    }
+}
+
+.wasteless, .webSpace, .alumni, .lister, .pup {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.projLine1, .projLine2, .proj, .ach {
+    position: absolute;
+}
+
+.projLine1 {
+    border-bottom: 2px solid rgb(46, 60, 81);
+    width: 30%;
+    bottom: 11vh;
+    right: 22vh;
+    margin-bottom: 68.5vh;
+}
+
+.projLine2 {
+    border-bottom: 2px solid rgb(46, 60, 81);
+    width: 30%;
+    bottom: 25vh;
+    left: 22vh;
+    margin-bottom: 64.5vh;
+}
+.projects{
+    margin-top: 20vh;
+    margin-bottom: 30vh;
+}
+.proj {
+    bottom: 20vh;
+    left: 42%;
+    transform: translateX(-50%);
+    margin-bottom: 68vh;
+}
+
+
+.ach {
+    bottom: 10vh;
+    right: 89vh;
+    margin-bottom: 68vh;
+}
+
+.projTxt, .achTxt {
+    color: #bdbdbd;
+    font-size: 1rem;
+    z-index: 1000;
+}
+
+/* Info Section */
+.info {
+    position: relative;
+    padding-top: 20vh;
+    width: 100%;
+    height: 100vh;
+}
+
+.what, .aiTxt, .awsTxt, .webTxt {
+    color: #ffffff;
+}
+.infoTitle{
+    margin-left: 19vh;
+}
+.what {
+    font-size: 1rem;
+    color: #bdbdbd;
+}
+
+.aiTxt, .awsTxt, .webTxt {
+    font-size: 2rem;
+}
+
+.infoLine, .ai, .aws, .web, .infoLineLast {
+    position: absolute;
+}
+
+.infoLine {
+    border-bottom: 2px solid rgb(46, 60, 81);
+    width: 72.3%;
+    left: 7.7%;
+    top: 22.6vh;
+    margin-left: 22vh;
+}
+
+.ai {
+    top: 40vh;
+    left: 22vh;
+    width: 90vh;
+}
+
+.aws {
+    top: 70vh;
+    left: 22vh;
+}
+
+.web {
+    top: 100vh;
+    left: 22vh;
+}
+
+.infoLineLast {
+    border-bottom: 2px solid rgb(46, 60, 81);
+    width: 40%;
+    right: 22vh;
+    top: 118vh;
+}
+
+/* Contact Section */
+.contact {
+    position: relative;
+    padding-top: 20vh;
+    width: 100%;
+    height: 100vh;
+    margin-left: 19.3vh;
+    margin-top: 30vh;
+}
+
+.contactTitle, .contactMsg, .titleLine {
+    position: absolute;
+}
+.contactTitle{
+    width: 100%;
+}
+.contactTxt {
+    color: #bdbdbd;
+    font-size: 1rem;
+    position: absolute;
+    left: 167vh;
+}
+.contactMsg{
+    width: 150%;
+}
+.msg {
+    /* color: #ffffff; */
+    font-size: 4rem;
+    width: 40%;
+    left: 22vh;
+    top: 40vh;
+    margin-top: 25vh;
+    margin-bottom: 20vh;
+    background: linear-gradient(to right, rgb(84, 84, 84), rgb(255, 255, 255));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+.titleLine {
+    border-bottom: 2px solid rgb(46, 60, 81);
+    width: 75.7%;
+    /* ri: 2vh; */
+    top: 22.6vh;
+}
+
+.grid-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+.vertical-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.192);
+}
+.name{
+    height: 1px;
+}
+
+.vertical-line:nth-child(1) { left: 10%; }
+.vertical-line:nth-child(2) { left: 20%; }
+.vertical-line:nth-child(3) { left: 30%; }
+.vertical-line:nth-child(4) { left: 40%; }
+.vertical-line:nth-child(5) { left: 50%; }
+.vertical-line:nth-child(6) { left: 60%; }
+.vertical-line:nth-child(7) { left: 70%; }
+.vertical-line:nth-child(8) { left: 80%; }
+.vertical-line:nth-child(9) { left: 90%; }
+
+ 
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="grid-background">
+            <div class="vertical-line"></div>
+            <div class="vertical-line"></div>
+            <div class="vertical-line"></div>
+            <div class="vertical-line"></div>
+            <div class="vertical-line"></div>
+            <div class="vertical-line"></div>
+            <div class="vertical-line"></div>
+            <div class="vertical-line"></div>
+            <div class="vertical-line"></div>
+        </div>
+
+        <div class="content">
+            <nav id="navbar">
+                <div class="name">jm.dev</div>
+                <ul>
+                    <li><a href="#about" class="nav-btn" onclick="navigateTo('#about')">about</a></li>
+                    <li><a href="#projects" class="nav-btn" onclick="navigateTo('#projects')">projects</a></li>
+                    <li><a href="#contact" class="nav-btn" onclick="navigateTo('#contact')">contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="firstPage">
+                <div class="introTxt">
+                    <div class="text-container">
+                        <div class="txtName">Hi! I'm James Matthew</div>
+                        <div class="txtName2">a.k.a JM</div>
+                    </div>
+                    <div class="txt1">a passionate coder and aspiring software engineer</div>
+                </div>
+                <div class="lineSide"></div>
+                <div class="lineSideRight"></div>
+                <div class="lineBottom"></div>
+            </div>
+
+            <section class="about" id="about">
+                <div class="aboutTopLine"></div>
+                <div class="aboutLeftLine"></div>
+                <div class="aboutLineBottom"></div>
+                <div class="aboutTxt">.about</div>
+                <div class="pg">
+                    <div class="pgTxt">i am a 3rd year information technology student at polytechnic university of the philippines sto.tomas, always finding ways to improve myself</div>
+                </div>
+                <a href="#" class="about-me-button">about me</a>
+                <div class="philo">
+                    <div class="kaizen">philosohpy: kaizen</div>
+                </div>
+                <div class="img">
+                    <img src="jm.jpg" class="pic"  data-aos="zoom-in"  data-aos-easing="ease-in-out" alt="">
+                </div>
+                <div class="inner"></div>
+                <div class="status">
+                    <div class="open">open for work</div>
+                </div>
+            </section>
+
+            <section class="projects" id="projects">
+                <div class="projLine1"></div>
+                <div class="proj">
+                    <div class="projTxt">.projects</div>
+                </div>
+                <div class="projLine2"></div>
+                <div class="ach">
+                    <div class="achTxt">.achievements</div>
+                </div>
+                <main>
+                    <article data-aos="zoom-in" data-aos-delay="50"><img src="wasteless.png" data-aos="zoom-in" class="wasteless" alt=""></article>
+                    <article data-aos="zoom-in" data-aos-delay="60"><img src="webspace.jpg" data-aos="zoom-in" class="webSpace" alt=""></article>
+                    <article data-aos="zoom-in" data-aos-delay="70"><img src="alumni.jpg" data-aos="zoom-in" class="alumni" alt=""></article>
+                    <article data-aos="zoom-in" data-aos-delay="80"><img src="lister.jpg" data-aos="zoom-in" class="lister" alt=""></article>
+                    <article data-aos="zoom-in" data-aos-delay="90"><img src="pup.jpg" data-aos="zoom-in" class="pup" alt=""></article>
+                </main>
+            </section>
+
+            <section class="info">
+                <div class="infoLine"></div>
+                <div class="infoTitle">
+                    <div class="what">.what am i up to?</div>
+                </div>
+                <div class="ai">
+                    <div class="aiTxt" data-aos="slide-up" >learning artificial intelligence/machine learning</div>
+                </div>
+                <a href="#" class="learn-me-button">learn more</a>
+                <div class="aws">
+                    <div class="awsTxt" data-aos="slide-up">learning cloud, specifically aws</div>
+                </div>
+                <a href="#" class="learn-me-button2">learn more</a>
+                <div class="web">
+                    <div class="webTxt" data-aos="slide-up">continously upskilling in web development</div>
+                </div>
+                <a href="#" class="learn-me-button3">learn more</a>
+                <div class="infoLineLast"></div>
+            </section>
+
+            <section class="contact" >
+                <div class="titleLine"></div>
+                <div class="contactTitle">
+                    <div class="contactTxt" id="contact">.say hello</div>
+                </div>
+                <div class="contactMsg">
+                    <div class="msg">i'm open for work, feel free to contact me to see how we can collaborate. i will be glad to join a team!</div>
+                </div>
+                <a href="#" class="contact-me-button">contact me</a>
+            </section>
+        </div>
+
+        <div class="decorative-elements">
+            <div class="lines">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+            <div class="headerLine"></div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+    <script>
+
+const main = () => {
+  const articles = Array.from(document.querySelectorAll("article"));
+
+  articles.forEach((article, index) => {
+    setTimeout(() => {
+      article.classList.add("reveal");
+    }, index * 250);
+  });
+};
+document.addEventListener("DOMContentLoaded", main);
+
+</script>
+</body>
+
+</html>
